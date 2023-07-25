@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stackerlberg"
+version = "0.0.1"
+authors = [
+  { name="Matthias Gerstgrasser", email="matthias@gerstgrasser.net" },
+]
+description = "A package for multi-agent RL with Stackelberg equilibrium guarantees"
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.7"
+dependencies = [
+    "ray[rllib]==2.0.1",
+    "torch>=1.12.0",
+    "tensorflow>=2.9.1",
+    "wandb>=0.12.21",
+    "hyperopt>=0.2.7",
+    "gym>=0.21.0",
+    "numpy==1.23.0",
+    "pydantic<2.0.0",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/mgerstgrasser/oracles_and_followers"
+"Bug Tracker" = "https://github.com/mgerstgrasser/oracles_and_followers/issues"
+
+[tool.setuptools]
+packages = ["stackerlberg"]
+
+[project.optional-dependencies]
+tests = [
+  'pytest >= 7.1.2',
+  'pytest-xdist[psutil] >= 2.5.0',
+  'pytest-forked >= 1.4.0',
+]
+format = [
+  'black >= 23.7.0',
+  'isort >= 5.10.1',
+]
+
+# Options for isort, black, etc.
+[tool.isort]
+profile = "black"
+
+[tool.black]
+line-length = 140
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+]
+# addopts = "-m 'not slow'"
+addopts = "-n auto -m 'not slow'"
